@@ -11,22 +11,47 @@ $uri = explode('?', $uri);
 
 switch ($uri[0]) {
 	case '':
-		include "modules/main/main.php";
+		require ROOT . "modules/main/index.php";
 		break;
 
-	case 'about':
-		include "modules/about/about.php";
+	// ::::::::::::::::::: USERS :::::::::::::::::::
+
+	case 'registration':
+		include ROOT . "modules/login/registration.php";
 		break;
 
-	case 'contacts':
-		include "modules/contacts/contacts.php";
+	case 'login':
+		require ROOT . "modules/login/login.php";
+		break;
+
+	case 'logout':
+		include ROOT . "modules/login/logout.php";
+		break;
+
+	case 'lost-password':
+		include ROOT . "modules/login/lost-password.php";
+		break;
+
+	case 'set-new-password':
+		include ROOT . "modules/login/set-new-password.php";
+		break;
+
+	case 'profile':
+		include ROOT . "modules/profile/index.php";
+		break;
+
+	case 'profile-edit':
+		include ROOT . "modules/profile/edit.php";
 		break;
 
 	case 'blog':
-		include "modules/blog/blog.php";
+		echo "Blog page";
+		echo "<br>";
+		echo "$uri[1]";
+		// print_r($uri[1]);
 		break;
 
 	default:
-		include "modules/main/main.php";
+		echo "Main page / 404";
 		break;
 }
