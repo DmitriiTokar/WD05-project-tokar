@@ -1,13 +1,26 @@
 <?php
 
-require "config.php";
-require "db.php";
+// Хост сайта
+define('HOST', 'http://' . $_SERVER['HTTP_HOST'] . '/');
+
+// Физический путь к корневой директории скрипта
+define('ROOT', dirname(__FILE__).'/');
+
+$errors = array();
+$success = array();
+
+require ROOT . "config.php";
+require ROOT . "db.php";
+require ROOT . "libs/functions.php";
+session_start();
 
 $uri = $_SERVER['REQUEST_URI'];
 $uri = rtrim($uri, "/");
 $uri = filter_var($uri, FILTER_SANITIZE_URL);
 $uri = substr($uri, 1);
 $uri = explode('?', $uri);
+
+
 
 switch ($uri[0]) {
 	case '':
