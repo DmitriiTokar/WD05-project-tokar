@@ -12,7 +12,6 @@
 
 		<div class="d-inline-block text-center w-100"><a class="registration-form__password-recovery"
 		                                                 href="<?= HOST ?>login">Вернуться на страницу входа</a></div>
-
 	</div>
 	<div class="registration-form__button">
 		<?php if ( $newPasswordReady == false ): ?>

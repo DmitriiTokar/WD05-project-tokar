@@ -33,21 +33,21 @@ if (!empty($_GET['email'])) {
 		echo "Пользователь с таким email не найден";
 		die;
 	}
-} else if ( isset($_POST['set-new-password']) ) {
+} else if (isset($_POST['set-new-password']) && trim($_POST['resetpassword']) != '') {
 	// Если форма установки нового пароля для пользователя отправлена
 	// Ищем пользователя по Email
-	$user = R::findOne('users', 'email = ?', array( $_POST['resetemail']) );
+	$user = R::findOne('users', 'email = ?', array($_POST['resetemail']));
 	$user->recovery_code_times--; // recovery_code_times = 1
 	R::store($user);
 
 	$user = R::findOne('users', 'email = ?', array($_POST['resetemail']));
-	if ( $user ) {
-		if ( $user->recovery_code_times < 1 ) {
+	if ($user) {
+		if ($user->recovery_code_times < 1) {
 			die;
 		}
 
 		// Проверяем onetimecode
-		if ( $user->recovery_code == $_POST['onetimecode']) {
+		if ($user->recovery_code == $_POST['onetimecode']) {
 
 			// Если все верно - ставим новый пароль и убиваем код
 			$user->password = password_hash($_POST['resetpassword'], PASSWORD_DEFAULT);
@@ -60,8 +60,10 @@ if (!empty($_GET['email'])) {
 		}
 	}
 
+} else if (trim($_POST['resetpassword']) == '') {
+	$errors[] = ['title' => 'Введите пароль'];
 } else {
-	header("Location: " . HOST ."lost-password");
+	header("Location: " . HOST . "lost-password");
 	die;
 }
 
