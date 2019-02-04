@@ -1,4 +1,4 @@
-<div class="card-post mb-20">
+<div class="card-post mb-20 mr-20">
 	<div class="card-post__image mb-15">
 		<?php if ($post->post_img_small != "") { ?>
 			<img src="<?= HOST ?>usercontent/blog/<?= $post->post_img_small ?>" alt=""/>

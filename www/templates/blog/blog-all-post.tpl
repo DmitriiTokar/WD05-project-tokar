@@ -9,7 +9,7 @@
 
 
 	?>
-	<div class="row justify-content-between mb-50">
+	<div class="row justify-content-right mb-50">
 		<?php foreach ($posts as $post) { ?>
 			<?php include ROOT . "templates/blog/blog-card.tpl" ?>
 		<?php } ?>

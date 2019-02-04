@@ -1,11 +1,17 @@
 <div class="container user-content pt-70 make-relative">
 	<div class="row">
 		<div class="col-10 offset-1">
-			<div class="blog__button--edit"><input class="button button-edit" type="submit" value="Редактировать"
-			                                       name="name"/></div>
+
 			<div class="blog-post">
 				<div class="blog-post-heading-wrapper">
-					<h1 class="blog-post__title title-1"><?=$post['title']?></h1>
+					<div class="profile justify-content-between">
+						<div class="title-1 profile__title"><?=$post['title']?></div>
+						<div class="">
+							<input class="button button-edit" type="submit" value="Редактировать"
+							       name="name"/>
+						</div>
+					</div>
+				</div>
 					<div class="blog-post__info">
 						<div class="blog-post__info-name">Емельян Казаков</div>
 						<div class="blog-post__info-category"><a href="#!">Путешествия</a></div>
@@ -13,7 +19,11 @@
 						<div class="blog-post__info-comment-count"><a href="#!">2 комментария</a></div>
 					</div>
 				</div>
-				<img class="blog-post__image" src="<?=HOST?>usercontent/blog/<?=$post['post_img']?>"/>
+				<?php if ($post->post_img_small != "") { ?>
+					<img class="blog-post__image" src="<?=HOST?>usercontent/blog/<?=$post['post_img']?>"/>
+				<?php } else { ?>
+					<img src="<?= HOST ?>usercontent/blog-no-image-big.png?>" alt=""/>
+				<?php } ?>
 				<div class="blog-post__content">
 					<?=$post['text']?>
 				</div>
