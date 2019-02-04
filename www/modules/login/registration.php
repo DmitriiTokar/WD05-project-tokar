@@ -6,8 +6,11 @@ if (isset($_POST['register'])) {
 
 
 	if (trim($_POST['email']) == '') {
-		$errors[] = ['title' => 'Введите Email', 'desc' => 'Используйте другой email чтобы создать новый аккаунт. Или воспользуйтесь <a
-							href="#{link}">восстановлением пароля</a>, чтобы войти на сайт.'];
+		$errors[] = ['title' => 'Введите Email'];
+	}  else if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+
+	} else {
+		$errors[] = ['title' => 'Введите корректный email'];
 	}
 
 	if (trim($_POST['password']) == '') {

@@ -8,7 +8,12 @@ $user = R::load('users', $currentUser->id);
 if (isset($_POST['profile-update'])) {
 	if (trim($_POST['email']) == '') {
 		$errors[] = ['title' => 'Введите email'];
+	} else if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+
+	} else {
+		$errors[] = ['title' => 'Введите корректный email'];
 	}
+
 
 	if (trim($_POST['name']) == '') {
 		$errors[] = ['title' => 'Введите имя'];

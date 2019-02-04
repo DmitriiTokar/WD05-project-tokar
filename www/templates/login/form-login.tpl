@@ -4,7 +4,7 @@
 	<div class="registration-form__email">
 		<input class="input-text" type="text" placeholder="E-mail" name="email"/></div>
 	<div class="registration-form__password">
-		<input class="input-text" type="text" placeholder="Пароль" name="password"/></div>
+		<input class="input-text" type="password" placeholder="Пароль" name="password"/></div>
 	<div class="password-remember-wrapper">
 		<div class="registration-form__remember"><label class="form-label"><input class="form-input-checkbox"
 		                                                                          type="checkbox" name="checkbox"
