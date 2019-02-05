@@ -1,0 +1,18 @@
+<?php if ($_GET['result'] == 'catCreated') {?>
+		<div class="notification__success mb-20" data-notify-hide>
+			Категория успешно добавлена!
+		</div>
+<?php } ?>
+
+<?php if ($_GET['result'] == 'catEdited') {?>
+	<div class="notification__success mb-20" data-notify-hide>
+		Категория успешно обновлена!
+	</div>
+<?php } ?>
+
+<?php if ($_GET['result'] == 'catDeleted') {?>
+	<div class="notification__error mb-20" data-notify-hide>
+		Категория успешно удалена!
+	</div>
+<?php } ?>
+
