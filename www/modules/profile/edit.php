@@ -23,6 +23,7 @@ if (isset($_POST['profile-update'])) {
 		$errors[] = ['title' => 'Введите фамилию'];
 	}
 
+
 	if (empty($errors)) {
 		$user->name = htmlentities($_POST['name']);
 		$user->email = htmlentities($_POST['email']);
@@ -52,7 +53,7 @@ if (isset($_POST['profile-update'])) {
 			if ( !preg_match("/\.(gif|jpg|jpeg|png)$/i", $fileName) ) {
 				$errors[]  = [
 					'title' => 'Неверный формат файла',
-					'desc' => '<p>Файл должен быть в формате gif, jpg, jpeg, или png.</p>', ];
+					'desc' => 'Файл изображения должен быть в формате gif, jpg, jpeg, или png.'];
 			}
 
 			if ( $fileErrorMsg == 1 ) {
@@ -64,7 +65,6 @@ if (isset($_POST['profile-update'])) {
 
 			if ( $avatar != "" ) {
 				$picurl = $avatarFolderLocation . $avatar;
-				// die($picurl);
 				if ( file_exists($picurl) ) { unlink($picurl); }
 				$picurl48 = $avatarFolderLocation . '48-' . $avatar;
 				if ( file_exists($picurl48) ) { unlink($picurl48); }

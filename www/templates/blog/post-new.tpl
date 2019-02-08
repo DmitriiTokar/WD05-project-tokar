@@ -12,7 +12,6 @@
 							<?php foreach ($cats as $cat): ?>
 								<option value="<?= $cat['id'] ?>"><?= $cat['cat_title'] ?></option>
 							<?php endforeach ?>
-							<option value=""></option>
 						</select>
 					</label>
 				</div>
