@@ -1,10 +1,19 @@
 <?php
 
+if (!isAdmin()) {
+	header('Location: ' . HOST);
+	die();
+}
+
 $title = "Создать новую категорию";
 
 if (isset($_POST['catNew'])) {
 	if (trim($_POST['catTitle']) == '') {
 		$errors[] = ['title' => 'Введите название категории'];
+	}
+
+	if (R::count('categories', 'cat_title = ?', array($_POST['catTitle']))) {
+		$errors[] = ['title' => 'Название категории уже существует. Выберите другое!'];
 	}
 
 	if (empty($errors)) {

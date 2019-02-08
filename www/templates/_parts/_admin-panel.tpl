@@ -14,7 +14,7 @@
 		<a class="admin-panel-menu__link" href="<?= HOST ?>blog/post-new"><i
 					class="fas fa-plus-circle admin-panel-menu__icon"></i>Пост</a>
 		<a class="admin-panel-menu__link" href="<?= HOST ?>blog/categories"><i
-					class="fas fa-folder-circle admin-panel-menu__icon"></i>Категория</a>
+					class="fas fa-folder admin-panel-menu__icon"></i>Категория</a>
 		<a class="admin-panel-menu__link"
 		   href="works-add.html"><i
 					class="fas fa-plus-circle admin-panel-menu__icon"></i>Работа</a>

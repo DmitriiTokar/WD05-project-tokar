@@ -71,6 +71,14 @@ switch ($uri[0]) {
 		include ROOT . "modules/blog/post-new.php";
 		break;
 
+	case 'blog/post-edit':
+		include ROOT . "modules/blog/post-edit.php";
+		break;
+
+	case 'blog/post-delete':
+		include ROOT . "modules/blog/post-delete.php";
+		break;
+
 // ::::::::::::::::::: CATEGORIES :::::::::::::::::::
 
 	case 'blog/categories':

@@ -4,5 +4,6 @@ $ (document).ready (function () {
 		$('[data-notify-hide]').slideUp(400);
 	}, 2000);
 
+	CKEDITOR.replace( 'ckEditor' );
 
 });

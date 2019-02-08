@@ -6,3 +6,12 @@
 	text-decoration: none !important;
 }
 
+.load-file-wrap-img {
+	position: relative;
+}
+
+.load-file-wrap__button {
+	position: absolute;
+	right: 66%;
+	top: 70%;
+}
