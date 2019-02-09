@@ -47,7 +47,7 @@ if (isset($_POST['postnew'])) {
 			if (!preg_match("/\.(gif|jpg|jpeg|png)$/i", $fileName)) {
 				$errors[] = [
 					'title' => 'Неверный формат файла',
-					'desc' => '<p>Файл должен быть в формате gif, jpg, jpeg, или png.</p>',];
+					'desc' => 'Файл должен быть в формате gif, jpg, jpeg, или png.',];
 			}
 
 			if ( $fileErrorMsg == 1 ) {

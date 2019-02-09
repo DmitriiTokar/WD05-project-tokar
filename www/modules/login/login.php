@@ -6,8 +6,7 @@ if (isset($_POST['login'])) {
 
 
 	if (trim($_POST['email']) == '') {
-		$errors[] = ['title' => 'Введите Email', 'desc' => 'Используйте другой email чтобы создать новый аккаунт. Или воспользуйтесь <a
-							href="#{link}">восстановлением пароля</a>, чтобы войти на сайт.'];
+		$errors[] = ['title' => 'Введите Email'];
 	}
 
 	if (trim($_POST['password']) == '') {

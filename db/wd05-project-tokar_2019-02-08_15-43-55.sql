@@ -1,5 +1,5 @@
-#SXD20|20011|50641|70210|2019.02.07 17:35:22|wd05-project-tokar|0|3|7|
-#TA categories`3`16384|posts`3`16384|users`1`16384
+#SXD20|20011|50641|70210|2019.02.08 15:43:55|wd05-project-tokar|0|4|11|
+#TA categories`3`16384|comments`4`16384|posts`3`16384|users`1`16384
 #EOH
 
 #	TC`categories`utf8mb4_unicode_520_ci	;
@@ -13,6 +13,24 @@ INSERT INTO `categories` VALUES
 (4,'PHP'),
 (5,'Python'),
 (6,'JS')	;
+#	TC`comments`utf8mb4_unicode_520_ci	;
+CREATE TABLE `comments` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) unsigned DEFAULT NULL,
+  `user_id` int(11) unsigned DEFAULT NULL,
+  `text` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_foreignkey_comments_post` (`post_id`),
+  KEY `index_foreignkey_comments_user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci	;
+#	TD`comments`utf8mb4_unicode_520_ci	;
+INSERT INTO `comments` VALUES 
+(1,30,4,'Новый комментарий','2019-02-08 13:32:44'),
+(2,30,4,'Новый комментарий','2019-02-08 15:18:22'),
+(3,30,4,'Новый комментарий','2019-02-08 15:18:26'),
+(4,30,7,'Новый комментарий','2019-02-08 15:29:30'),
+(5,29,4,'Новый комментарий','2019-02-08 15:39:56')	;
 #	TC`posts`utf8mb4_unicode_520_ci	;
 CREATE TABLE `posts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -47,8 +65,9 @@ CREATE TABLE `users` (
   `recovery_code` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `recovery_code_times` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci	;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci	;
 #	TD`users`utf8mb4_unicode_520_ci	;
 INSERT INTO `users` VALUES 
-(4,'dmtokfl@gmail.com','$2y$10$qYhhszQsrADzCflq1KzyzupvnJBfGBKAVEuw2EtxwGBZ0a4jCds6.','admin','Дмитрий','Токарь','Россия','Москва','-251025578.jpg','48--251025578.jpg','VZ1RxjX9QGAOzig',0),
-(7,'dmtr3243@gmail.com','$2y$10$ZMLTdWeMuO79FFJ4MpMk6OeoHa9dTXzPm4FB/esLPkBZPkZXm5dpy','user',\N,\N,\N,\N,\N,\N,\N,\N)	;
+(4,'dmtokfl@gmail.com','$2y$10$qYhhszQsrADzCflq1KzyzupvnJBfGBKAVEuw2EtxwGBZ0a4jCds6.','admin','Дмитрий','Токарь','Россия','Москва','689408166.jpg','48-689408166.jpg','VZ1RxjX9QGAOzig',0),
+(7,'dmtr3243@gmail.com','$2y$10$ZMLTdWeMuO79FFJ4MpMk6OeoHa9dTXzPm4FB/esLPkBZPkZXm5dpy','user','Андрей','Андреев','','','-484073350.jpg','48--484073350.jpg',\N,\N),
+(8,'mail@mail.com','$2y$10$Id4FuytKuJICAYH/.W8WfuS4No6j7wE1.O.zYL1PUI1BYAN2PmWue','user',\N,\N,\N,\N,\N,\N,\N,\N)	;

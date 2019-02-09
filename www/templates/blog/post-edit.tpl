@@ -15,7 +15,6 @@
 									<?= $cat['cat_title'] ?>
 								</option>
 							<?php endforeach ?>
-							<option value=""></option>
 						</select>
 					</label>
 				</div>
