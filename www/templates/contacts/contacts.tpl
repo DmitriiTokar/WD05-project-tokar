@@ -10,6 +10,16 @@
 		<div class="col-md-6 contacts">
 			<div class="contacts__title">Контакты</div>
 			<div class="row">
+				<?php if ($contacts['name'] != '') { ?>
+					<div class="col-4 contacts__name">Имя</div>
+					<div class="col-6 contacts__value contacts__value--link"><a href="#!"><?= $contacts['name'] ?></a>
+					</div>
+				<?php } ?>
+				<?php if ($contacts['surname'] != '') { ?>
+					<div class="col-4 contacts__name">Фамилия</div>
+					<div class="col-6 contacts__value contacts__value--link"><a href="#!"><?= $contacts['surname'] ?></a>
+					</div>
+				<?php } ?>
 				<?php if ($contacts['email'] != '') { ?>
 					<div class="col-4 contacts__name">Email</div>
 					<div class="col-6 contacts__value contacts__value--link"><a href="#!"><?= $contacts['email'] ?></a>
@@ -25,7 +35,10 @@
 				<?php } ?>
 			</div>
 			<div class="row">
-				<div class="col-4 contacts__name">Социальные сети</div>
+				<?php if ($contacts['vk'] == '' && $contacts['fb'] == '' && $contacts['github'] == '' && $contacts['twitter'] == '') { ?>
+				<?php } else { ?>
+					<div class="col-4 contacts__name">Социальные сети</div>
+				<?php } ?>
 				<div class="col-6 contacts__value">
 					<?php if ($contacts['vk'] != '') { ?>
 						<div class="contacts__value--bold-link"><a href="<?= $contacts['vk'] ?>">Профиль Вконтакте</a>
@@ -33,6 +46,14 @@
 					<?php } ?>
 					<?php if ($contacts['fb'] != '') { ?>
 						<div class="contacts__value--bold-link"><a href="<?= $contacts['fb'] ?>">Профиль Facebook</a>
+						</div>
+					<?php } ?>
+					<?php if ($contacts['github'] != '') { ?>
+						<div class="contacts__value--bold-link"><a href="<?= $contacts['github'] ?>">Профиль GitHub</a>
+						</div>
+					<?php } ?>
+					<?php if ($contacts['twitter'] != '') { ?>
+						<div class="contacts__value--bold-link"><a href="<?= $contacts['twitter'] ?>">Профиль Twitter</a>
 						</div>
 					<?php } ?>
 				</div>

@@ -6,7 +6,11 @@ $contacts = R::load('contacts', 1);
 
 if (isset($_POST['contactsUpdate'])) {
 	if (trim($_POST['email']) == '') {
-		$errors[] = ['title' => 'Введите EMAIL'];
+		$errors[] = ['title' => 'Введите Email'];
+	} else if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+
+	} else {
+		$errors[] = ['title' => 'Введите корректный email'];
 	}
 
 	if (trim($_POST['phone']) == '') {
