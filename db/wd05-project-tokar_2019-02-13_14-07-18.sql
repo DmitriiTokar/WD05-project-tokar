@@ -1,5 +1,5 @@
-#SXD20|20011|50641|70210|2019.02.11 18:32:12|wd05-project-tokar|0|5|11|
-#TA categories`3`16384|comments`4`16384|contacts`0`16384|posts`3`16384|users`1`16384
+#SXD20|20011|50641|70210|2019.02.13 14:07:18|wd05-project-tokar|0|6|14|
+#TA categories`3`16384|comments`4`16384|contacts`0`16384|messages`3`16384|posts`3`16384|users`1`16384
 #EOH
 
 #	TC`categories`utf8mb4_unicode_520_ci	;
@@ -46,6 +46,22 @@ CREATE TABLE `contacts` (
   `skype` varchar(191) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8	;
+#	TC`messages`utf8mb4_unicode_520_ci	;
+CREATE TABLE `messages` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_file_name_original` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_file` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci	;
+#	TD`messages`utf8mb4_unicode_520_ci	;
+INSERT INTO `messages` VALUES 
+(5,'Дмитрий','dmtokfl@gmail.com','1234','Koala.jpg','1215752192.jpg','2019-02-12 17:29:51'),
+(6,'Дмитрий Токарь','dmtr3243@gmail.com','dmtr3243@gmail.com','Chrysanthemum.jpg','1215752192.jpg','2019-02-13 12:47:51'),
+(7,'Дмитрий','dmtokfl@gmail.com','dmtokfl@gmail.com',\N,\N,'2019-02-13 13:46:06')	;
 #	TC`posts`utf8mb4_unicode_520_ci	;
 CREATE TABLE `posts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
