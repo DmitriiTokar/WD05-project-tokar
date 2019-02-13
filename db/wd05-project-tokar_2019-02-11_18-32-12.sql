@@ -1,5 +1,5 @@
-#SXD20|20011|50641|70210|2019.02.08 15:43:55|wd05-project-tokar|0|4|11|
-#TA categories`3`16384|comments`4`16384|posts`3`16384|users`1`16384
+#SXD20|20011|50641|70210|2019.02.11 18:32:12|wd05-project-tokar|0|5|11|
+#TA categories`3`16384|comments`4`16384|contacts`0`16384|posts`3`16384|users`1`16384
 #EOH
 
 #	TC`categories`utf8mb4_unicode_520_ci	;
@@ -31,6 +31,21 @@ INSERT INTO `comments` VALUES
 (3,30,4,'Новый комментарий','2019-02-08 15:18:26'),
 (4,30,7,'Новый комментарий','2019-02-08 15:29:30'),
 (5,29,4,'Новый комментарий','2019-02-08 15:39:56')	;
+#	TC`contacts`utf8_general_ci	;
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(191) DEFAULT NULL,
+  `phone` varchar(191) DEFAULT NULL,
+  `address` varchar(191) DEFAULT NULL,
+  `name` text,
+  `surname` varchar(191) DEFAULT NULL,
+  `vk` varchar(191) DEFAULT NULL,
+  `fb` varchar(191) DEFAULT NULL,
+  `github` varchar(191) DEFAULT NULL,
+  `twitter` varchar(191) DEFAULT NULL,
+  `skype` varchar(191) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8	;
 #	TC`posts`utf8mb4_unicode_520_ci	;
 CREATE TABLE `posts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -49,7 +64,7 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` VALUES 
 (28,'Js пост','JS пост',4,'2019-02-07 14:26:37','-319576017.jpg','320--319576017.jpg',6,\N),
 (29,'PHP пост','JS пост',4,'2019-02-07 14:26:51','106848036.jpg','320-106848036.jpg',4,\N),
-(30,'Python пост','Python пост',4,'2019-02-07 14:27:07','1088495063.jpg','320-1088495063.jpg',5,\N)	;
+(30,'Python пост','<p>Python пост</p>\r\n',4,'2019-02-07 14:27:07','1088495063.jpg','320-1088495063.jpg',5,'2019-02-09 14:33:16')	;
 #	TC`users`utf8mb4_unicode_520_ci	;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

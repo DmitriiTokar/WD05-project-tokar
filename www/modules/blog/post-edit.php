@@ -54,44 +54,48 @@ if (isset($_POST['postEdit'])) {
 				$errors[] = ['title' => 'При загрузке изображения произошла ошибка. Повторите попытку' ];
 			}
 
-			$postImg = $post->post_img;
-			$postImgFolderLocation = ROOT . 'usercontent/blog/';
+			if (empty($errors)) {
 
-			if ( $postImg != "" ) {
-				$picurl = $postImgFolderLocation . $postImg;
-				// die($picurl);
-				if ( file_exists($picurl) ) { unlink($picurl); }
-				$picurl320 = $postImgFolderLocation . '320-' . $postImg;
-				if ( file_exists($picurl320) ) { unlink($picurl320); }
+				$postImg = $post->post_img;
+				$postImgFolderLocation = ROOT . 'usercontent/blog/';
+
+				if ( $postImg != "" ) {
+					$picurl = $postImgFolderLocation . $postImg;
+					// die($picurl);
+					if ( file_exists($picurl) ) { unlink($picurl); }
+					$picurl320 = $postImgFolderLocation . '320-' . $postImg;
+					if ( file_exists($picurl320) ) { unlink($picurl320); }
+				}
+
+				$db_file_name = rand(100000000000,999999999999) . "." . $fileExt;
+				$postImgFolderLocation = ROOT . 'usercontent/blog/';
+				$uploadfile = $postImgFolderLocation . $db_file_name;
+				$moveResult = move_uploaded_file($fileTmpLoc, $uploadfile);
+
+				if ($moveResult != true) {
+					$errors[] = ['title' => 'Ошибка сохранения файла' ];
+				}
+
+				include_once( ROOT . "/libs/image_resize_imagick.php");
+
+				$target_file =  $postImgFolderLocation . $db_file_name;
+				$wmax = 920;
+				$hmax = 620;
+				$img = createThumbnailBig($target_file, $wmax, $hmax);
+				$img->writeImage($target_file);
+
+				$post->postImg = $db_file_name;
+
+				$target_file =  $postImgFolderLocation . $db_file_name;
+				$resized_file = $postImgFolderLocation . "320-" . $db_file_name;
+				$wmax = 320;
+				$hmax = 140;
+				$img = createThumbnailCrop($target_file, $wmax, $hmax);
+				$img->writeImage($resized_file);
+
+				$post->postImgSmall = "320-" . $db_file_name;
 			}
 
-			$db_file_name = rand(100000000000,999999999999) . "." . $fileExt;
-			$postImgFolderLocation = ROOT . 'usercontent/blog/';
-			$uploadfile = $postImgFolderLocation . $db_file_name;
-			$moveResult = move_uploaded_file($fileTmpLoc, $uploadfile);
-
-			if ($moveResult != true) {
-				$errors[] = ['title' => 'Ошибка сохранения файла' ];
-			}
-
-			include_once( ROOT . "/libs/image_resize_imagick.php");
-
-			$target_file =  $postImgFolderLocation . $db_file_name;
-			$wmax = 920;
-			$hmax = 620;
-			$img = createThumbnailBig($target_file, $wmax, $hmax);
-			$img->writeImage($target_file);
-
-			$post->postImg = $db_file_name;
-
-			$target_file =  $postImgFolderLocation . $db_file_name;
-			$resized_file = $postImgFolderLocation . "320-" . $db_file_name;
-			$wmax = 320;
-			$hmax = 140;
-			$img = createThumbnailCrop($target_file, $wmax, $hmax);
-			$img->writeImage($resized_file);
-
-			$post->postImgSmall = "320-" . $db_file_name;
 		}
 
 		R::store($post);

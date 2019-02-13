@@ -47,40 +47,45 @@ if (isset($_POST['postnew'])) {
 			if (!preg_match("/\.(gif|jpg|jpeg|png)$/i", $fileName)) {
 				$errors[] = [
 					'title' => 'Неверный формат файла',
-					'desc' => 'Файл должен быть в формате gif, jpg, jpeg, или png.',];
+					'desc' => '<p>Файл должен быть в формате gif, jpg, jpeg, или png.</p>',];
 			}
 
 			if ( $fileErrorMsg == 1 ) {
 				$errors[] = ['title' => 'При загрузке изображения произошла ошибка. Повторите попытку' ];
 			}
 
-			$db_file_name = rand(100000000000,999999999999) . "." . $fileExt;
-			$postImgFolderLocation = ROOT . 'usercontent/blog/';
-			$uploadfile = $postImgFolderLocation . $db_file_name;
-			$moveResult = move_uploaded_file($fileTmpLoc, $uploadfile);
+			if (empty($errors)) {
 
-			if ($moveResult != true) {
-				$errors[] = ['title' => 'Ошибка сохранения файла' ];
+				$db_file_name = rand(100000000000,999999999999) . "." . $fileExt;
+				$postImgFolderLocation = ROOT . 'usercontent/blog/';
+				$uploadfile = $postImgFolderLocation . $db_file_name;
+				$moveResult = move_uploaded_file($fileTmpLoc, $uploadfile);
+
+				if ($moveResult != true) {
+					$errors[] = ['title' => 'Ошибка сохранения файла' ];
+				}
+
+				include_once( ROOT . "/libs/image_resize_imagick.php");
+
+				$target_file =  $postImgFolderLocation . $db_file_name;
+				$wmax = 920;
+				$hmax = 620;
+				$img = createThumbnailBig($target_file, $wmax, $hmax);
+				$img->writeImage($target_file);
+
+				$post->postImg = $db_file_name;
+
+				$target_file =  $postImgFolderLocation . $db_file_name;
+				$resized_file = $postImgFolderLocation . "320-" . $db_file_name;
+				$wmax = 320;
+				$hmax = 140;
+				$img = createThumbnailCrop($target_file, $wmax, $hmax);
+				$img->writeImage($resized_file);
+
+				$post->postImgSmall = "320-" . $db_file_name;
 			}
 
-			include_once( ROOT . "/libs/image_resize_imagick.php");
 
-			$target_file =  $postImgFolderLocation . $db_file_name;
-			$wmax = 920;
-			$hmax = 620;
-			$img = createThumbnailBig($target_file, $wmax, $hmax);
-			$img->writeImage($target_file);
-
-			$post->postImg = $db_file_name;
-
-			$target_file =  $postImgFolderLocation . $db_file_name;
-			$resized_file = $postImgFolderLocation . "320-" . $db_file_name;
-			$wmax = 320;
-			$hmax = 140;
-			$img = createThumbnailCrop($target_file, $wmax, $hmax);
-			$img->writeImage($resized_file);
-
-			$post->postImgSmall = "320-" . $db_file_name;
 		}
 
 		R::store($post);

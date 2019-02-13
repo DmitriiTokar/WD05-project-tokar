@@ -23,7 +23,6 @@ if (isset($_POST['profile-update'])) {
 		$errors[] = ['title' => 'Введите фамилию'];
 	}
 
-
 	if (empty($errors)) {
 		$user->name = htmlentities($_POST['name']);
 		$user->email = htmlentities($_POST['email']);
@@ -53,49 +52,52 @@ if (isset($_POST['profile-update'])) {
 			if ( !preg_match("/\.(gif|jpg|jpeg|png)$/i", $fileName) ) {
 				$errors[]  = [
 					'title' => 'Неверный формат файла',
-					'desc' => 'Файл изображения должен быть в формате gif, jpg, jpeg, или png.'];
+					'desc' => '<p>Файл должен быть в формате gif, jpg, jpeg, или png.</p>', ];
 			}
 
 			if ( $fileErrorMsg == 1 ) {
 				$errors[] = ['title' => 'При загрузке изображения произошла ошибка. Повторите попытку' ];
 			}
+			if (empty($errors)) {
 
-			$avatar = $user->avatar;
-			$avatarFolderLocation = ROOT . 'usercontent/avatar/';
+				$avatar = $user->avatar;
+				$avatarFolderLocation = ROOT . 'usercontent/avatar/';
 
-			if ( $avatar != "" ) {
-				$picurl = $avatarFolderLocation . $avatar;
-				if ( file_exists($picurl) ) { unlink($picurl); }
-				$picurl48 = $avatarFolderLocation . '48-' . $avatar;
-				if ( file_exists($picurl48) ) { unlink($picurl48); }
+				if ( $avatar != "" ) {
+					$picurl = $avatarFolderLocation . $avatar;
+					// die($picurl);
+					if ( file_exists($picurl) ) { unlink($picurl); }
+					$picurl48 = $avatarFolderLocation . '48-' . $avatar;
+					if ( file_exists($picurl48) ) { unlink($picurl48); }
+				}
+
+				$db_file_name = rand(100000000000,999999999999) . "." . $fileExt;
+				$uploadfile = $avatarFolderLocation . $db_file_name;
+				$moveResult = move_uploaded_file($fileTmpLoc, $uploadfile);
+
+				if ($moveResult != true) {
+					$errors[] = ['title' => 'Ошибка сохранения файла' ];
+				}
+
+				include_once( ROOT . "/libs/image_resize_imagick.php");
+
+				$target_file =  $avatarFolderLocation . $db_file_name;
+				$wmax = 222;
+				$hmax = 222;
+				$img = createThumbnail($target_file, $wmax, $hmax);
+				$img->writeImage($target_file);
+
+				$user->avatar = $db_file_name;
+
+				$target_file =  $avatarFolderLocation . $db_file_name;
+				$resized_file = $avatarFolderLocation . "48-" . $db_file_name;
+				$wmax = 48;
+				$hmax = 48;
+				$img = createThumbnail($target_file, $wmax, $hmax);
+				$img->writeImage($resized_file);
+
+				$user->avatarSmall = "48-" . $db_file_name;
 			}
-
-			$db_file_name = rand(100000000000,999999999999) . "." . $fileExt;
-			$uploadfile = $avatarFolderLocation . $db_file_name;
-			$moveResult = move_uploaded_file($fileTmpLoc, $uploadfile);
-
-			if ($moveResult != true) {
-				$errors[] = ['title' => 'Ошибка сохранения файла' ];
-			}
-
-			include_once( ROOT . "/libs/image_resize_imagick.php");
-
-			$target_file =  $avatarFolderLocation . $db_file_name;
-			$wmax = 222;
-			$hmax = 222;
-			$img = createThumbnail($target_file, $wmax, $hmax);
-			$img->writeImage($target_file);
-
-			$user->avatar = $db_file_name;
-
-			$target_file =  $avatarFolderLocation . $db_file_name;
-			$resized_file = $avatarFolderLocation . "48-" . $db_file_name;
-			$wmax = 48;
-			$hmax = 48;
-			$img = createThumbnail($target_file, $wmax, $hmax);
-			$img->writeImage($resized_file);
-
-			$user->avatarSmall = "48-" . $db_file_name;
 
 		}
 
