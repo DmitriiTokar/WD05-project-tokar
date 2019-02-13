@@ -1,6 +1,9 @@
 <?php
 
-$title = "Контакты";
+$title = "Сообщение";
+
+$messages = R::find('messages', 'ORDER BY id DESC');
+
 
 ob_start();
 include ROOT . "templates/_parts/_header.tpl";

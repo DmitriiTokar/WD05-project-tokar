@@ -72,12 +72,14 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-			<form class="form-contact">
+			<form class="form-contact" action="<?=HOST?>contacts" method="post" enctype="multipart/form-data">
 				<div class="form-contact__title">Связаться со мной</div>
-				<div class="form-contact__name"><input class="input-text" type="text" placeholder="Введите имя"/></div>
-				<div class="form-contact__email"><input class="input-text" type="text" placeholder="Email"/></div>
+				<?php require ROOT . "templates/_parts/_errors.tpl" ?>
+				<?php require ROOT . "templates/_parts/_success.tpl" ?>
+				<div class="form-contact__name"><input class="input-text" type="text" placeholder="Введите имя" name="name"/></div>
+				<div class="form-contact__email"><input class="input-text" type="text" placeholder="Email" name="email"/></div>
 				<div class="form-contact__message"><textarea class="textarea" type="text"
-				                                             placeholder="Сообщение"></textarea></div>
+				                                             placeholder="Сообщение" name="message"></textarea></div>
 				<div class="form-contact__load-file">
 					<div class="load-file-title">Прикрепить файл</div>
 					<div class="load-file-opis">jpg, png, pdf, doc, весом до 2Мб.</div>
@@ -87,7 +89,7 @@
 					</div>
 				</div>
 				<div class="form-contact__save"><input class="button button-save" type="submit" value="Отправить"
-				                                       name="name"/></div>
+				                                       name="newMessage"/></div>
 			</form>
 		</div>
 	</div>

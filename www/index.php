@@ -113,7 +113,6 @@ switch ($uri[0]) {
 		include ROOT . "modules/contacts/messages.php";
 		break;
 
-
 	default:
 		echo "Main page / 404";
 		break;
